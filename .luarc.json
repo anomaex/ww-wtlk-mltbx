@@ -1,0 +1,7 @@
+{
+    "diagnostics.globals": [
+        "UnitName",
+        "CreateFrame",
+        "UIParent"
+    ]
+}

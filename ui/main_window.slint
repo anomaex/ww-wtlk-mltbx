@@ -1,0 +1,51 @@
+import { Button, VerticalBox, LineEdit, HorizontalBox } from "std-widgets.slint";
+
+
+export component MainWindow inherits Window {
+    title: "ww-wtlk-mltbx";
+    min-width: 480px;
+    min-height: 320px;
+    icon: @image-url("assets/icon.png");
+
+    in-out property <string> main_game_path: "";
+    in-out property <string> other_game_path: "";
+
+    callback game_browse(field: int);
+
+    VerticalBox {
+        HorizontalBox {
+            height: 40px;
+            
+            LineEdit {
+                text: root.main_game_path;
+                placeholder-text: "Path to wow.exe for MAIN account...";
+                read-only: true;
+            }
+            Button {
+                text: "Browse";
+                clicked => { root.game_browse(0) }
+            }
+        }
+        HorizontalBox {
+            height: 40px;
+            LineEdit {
+                text: root.other_game_path;
+                placeholder-text: "Path to wow.exe for OTHER accounts...";
+                read-only: true;
+            }
+            Button {
+                text: "Browse";
+                clicked => { root.game_browse(1) }
+            }
+        }
+        HorizontalBox {
+            height: 40px;
+            Button {
+                text: "Run";
+            }
+        }
+        Rectangle {
+            vertical-stretch: 1;
+        }
+    }
+}

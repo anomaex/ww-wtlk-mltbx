@@ -1,0 +1,14 @@
+[package]
+name = "ww-wtlk-mltbx"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.102"
+rfd = "0.17.2"
+slint = "1.15.1"
+tokio = { version = "1.49.0", features = ["full"] }
+
+[build-dependencies]
+slint-build = "1.15.1"
+winres = "0.1.12"

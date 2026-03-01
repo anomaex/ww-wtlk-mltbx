@@ -1,0 +1,9 @@
+## Interface: 30300
+## Title: ww-wtlk-mltbx-addon
+## Notes: Addon helper for ww-wtlk-mltbx
+## Author: Anomaex
+## Version: 0.0.1
+
+config\constants.lua
+utils\helper.lua
+main.lua

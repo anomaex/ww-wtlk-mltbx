@@ -1,0 +1,37 @@
+/target/
+
+# Secrets and configs
+.env
+.env.*
+! .env.example
+/config/local.toml
+
+# Slint
+.slint-preview
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# JetBrains (IntelliJ Rust / Rover)
+.idea/
+
+# Logs and temporary files
+**/*.rs.bk
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# AutoIt prototype
+secret.au3
+/autoit_prototype/src/bot/config/secret.au3
+/autoit_prototype/user_data
+
+# Temporary
+Cargo.lock
