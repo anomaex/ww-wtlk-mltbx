@@ -2,6 +2,10 @@
     "diagnostics.globals": [
         "UnitName",
         "CreateFrame",
-        "UIParent"
+        "UIParent",
+        "SaveBindings",
+        "SetBinding",
+        "LoadBindings",
+        "GetBindingKey"
     ]
 }

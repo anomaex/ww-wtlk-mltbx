@@ -1,17 +1,20 @@
+--
+-- main.lua
+--
 local addon_name, store = ...
-
-
-local function start()
-    local frame = store.utils.helper.create_frame("BotPixel", nil, nil, nil, nil, "TOPLEFT")
-    store.utils.helper.set_color_to_frame(0, 0, 1, frame)
-end
-
-
-local function warmup()
-end
+store.core = store.core or {}
 
 
 local function init()
+    local frame = store.core.create_frame("InWorld")
+    frame:set_color(0, 0, 255)
+
+    store.modules.bindings.init()
+end
+
+
+local function start()
+
 end
 
 
@@ -21,7 +24,6 @@ local function main()
     main_event_frame:SetScript("OnEvent", function(self, event, ...)
         if event == "PLAYER_ENTERING_WORLD" then
             init()
-            warmup()
             start()
         end
     end)

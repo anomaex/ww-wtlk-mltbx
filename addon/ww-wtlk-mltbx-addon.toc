@@ -5,5 +5,7 @@
 ## Version: 0.0.1
 
 config\constants.lua
-utils\helper.lua
+core\frame_manager.lua
+modules\bindings.lua
+
 main.lua
