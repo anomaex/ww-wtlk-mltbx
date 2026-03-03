@@ -4,12 +4,13 @@
 ## Author: Anomaex
 ## Version: 0.0.1
 
+config\binding_profile.lua
+config\secret.lua
+config\colors.lua
+
 core\frame_manager.lua
 core\binding_manager.lua
 core\macro_manager.lua
-
-config\binding_profile.lua
-config\secret.lua
 
 modules\action\common.lua
 modules\action\profiles\druid_restoration.lua

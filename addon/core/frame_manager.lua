@@ -4,7 +4,6 @@
 local addon_name, store = ...
 store.core = store.core or {}
 
-
 local defaults = {
     width = 10,
     height = 10,
@@ -24,7 +23,7 @@ function store.core.create_frame(name, width, height, x, y)
 
     local texture = frame:CreateTexture(nil, "OVERLAY")
     texture:SetAllPoints(frame)
-    texture:SetTexture(1, 1, 1, 1) -- Some times this not work, frame is still transparent
+    texture:SetTexture(1, 1, 1, 1) -- some times this not work, frame is still transparent
     texture:SetTexture("Interface\\Buttons\\WHITE8X8")
     frame.texture = texture
 
@@ -38,6 +37,7 @@ end
 
 
 function store.core.create_event_frame(name)
-    local frame = CreateFrame("Frame", name)
+    local frame_name = name .. "_" .. addon_name .. "_frame"
+    local frame = CreateFrame("Frame", frame_name)
     return frame
 end

@@ -6,9 +6,17 @@ store.modules = store.modules or {}
 store.modules.action = store.modules.action or {}
 store.modules.action.profiles = store.modules.action.profiles or {}
 
+local P = {} -- P - profile
 
-store.modules.action.profiles["druid_restoration"] = {
-    exec = function()
-        print("druid_restoration")
-    end
-}
+
+function P.init()
+
+end
+
+
+function P.update()
+
+end
+
+
+store.modules.action.profiles["druid_restoration"] = P
