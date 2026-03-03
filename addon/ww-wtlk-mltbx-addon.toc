@@ -4,8 +4,16 @@
 ## Author: Anomaex
 ## Version: 0.0.1
 
-config\constants.lua
 core\frame_manager.lua
-modules\bindings.lua
+core\binding_manager.lua
+core\macro_manager.lua
+
+config\binding_profile.lua
+config\secret.lua
+
+modules\action\common.lua
+modules\action\profiles\druid_restoration.lua
+modules\action\profiles\paladin_retribution.lua
+modules\action\dispatcher.lua
 
 main.lua

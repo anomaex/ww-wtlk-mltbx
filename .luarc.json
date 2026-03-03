@@ -6,6 +6,11 @@
         "SaveBindings",
         "SetBinding",
         "LoadBindings",
-        "GetBindingKey"
+        "GetBindingKey",
+        "GetMacroInfo",
+        "DeleteMacro",
+        "GetNumMacros",
+        "CreateMacro",
+        "GetTime"
     ]
 }

@@ -1,5 +1,5 @@
 ;
-; src/bot/core/window.au3
+; src\bot\core\window.au3
 ;
 #include-once
 

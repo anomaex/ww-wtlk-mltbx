@@ -15,7 +15,7 @@ local defaults = {
 function store.core.create_frame(name, width, height, x, y)
     local frame_name = name .. "_" .. addon_name .. "_frame"
 
-    local frame = CreateFrame("Frame", frame_name, UIParent)
+    local frame = CreateFrame("Frame", frame_name)
     frame:SetSize(width or defaults.width, height or defaults.height)
     frame:SetPoint(defaults.point, UIParent, defaults.point, x or 0, y or 0)
 
@@ -33,5 +33,11 @@ function store.core.create_frame(name, width, height, x, y)
     end
 
     frame:Show()
+    return frame
+end
+
+
+function store.core.create_event_frame(name)
+    local frame = CreateFrame("Frame", name)
     return frame
 end

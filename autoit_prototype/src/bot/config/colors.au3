@@ -1,5 +1,5 @@
 ;
-; src/bot/config/colors.au3
+; src\bot\config\colors.au3
 ;
 #include-once
 

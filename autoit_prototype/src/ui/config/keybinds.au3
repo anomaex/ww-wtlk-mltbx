@@ -1,5 +1,5 @@
 ;
-; src/ui/config/keybinds.au3
+; src\ui\config\keybinds.au3
 ;
 #include-once
 

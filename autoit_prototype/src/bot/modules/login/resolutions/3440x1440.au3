@@ -1,5 +1,5 @@
 ;
-; src/bot/modules/login/screen_resolution/3440x1440.au3
+; src\bot\modules\login\resolution\3440x1440.au3
 ;
 #include-once
 

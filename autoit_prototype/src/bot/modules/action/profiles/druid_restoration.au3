@@ -1,5 +1,5 @@
 ;
-; src/bot/modules/action/action_profiles/druid_restoration.au3
+; src\bot\modules\action\profiles\druid_restoration.au3
 ;
 #include-once
 

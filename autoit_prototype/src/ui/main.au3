@@ -1,5 +1,5 @@
 ;
-; src/ui/main.au3
+; src\ui\main.au3
 ;
 #include-once
 
@@ -225,7 +225,8 @@ func run_one_by_one($role)
     local $hwnd = HWnd(0)
     if not $flag then
         local $launch_dir = StringLeft($path, StringInStr($path, "\", 0, -1) - 1)
-        local $pid = Run($path, $launch_dir, @SW_SHOWNOACTIVATE)
+        ; Launch only in -d3d9ex, for more stable and performance fps, reduce lags, etc., NEED for CORRECT colors
+        local $pid = Run($path & " -d3d9ex", $launch_dir, @SW_SHOWNOACTIVATE)
         if @error then
             log_warning("Can't run game window, wow.exe, path: " & $path, $ui_hwnd)
             return
@@ -244,7 +245,7 @@ func run_one_by_one($role)
     endif
 
     check_running_bot($role) ; Check bot script, if already running, close and start a new bot script
-    Run(@AutoItExe & ' "src/bot/main.au3" ' & $role & ' ' & String($hwnd))
+    Run(@AutoItExe & ' "src\bot\main.au3" ' & $role & ' ' & String($hwnd))
 endfunc
 
 

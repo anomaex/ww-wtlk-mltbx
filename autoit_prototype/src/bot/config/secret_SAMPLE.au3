@@ -1,5 +1,5 @@
 ;
-; src/bot/config/secret.au3
+; src\bot\config\secret.au3
 ;
 #include-once
 

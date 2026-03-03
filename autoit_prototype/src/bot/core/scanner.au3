@@ -1,5 +1,5 @@
 ;
-; src/bot/core/scanner.au3
+; src\bot\core\scanner.au3
 ;
 #include-once
 

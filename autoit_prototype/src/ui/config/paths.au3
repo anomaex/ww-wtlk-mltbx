@@ -1,5 +1,5 @@
 ;
-; src/ui/config/paths.au3
+; src\ui\config\paths.au3
 ;
 #include-once
 

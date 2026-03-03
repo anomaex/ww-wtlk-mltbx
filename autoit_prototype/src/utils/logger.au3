@@ -1,5 +1,5 @@
 ;
-; src/utils/logger.au3
+; src\utils\logger.au3
 ;
 #include-once
 

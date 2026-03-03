@@ -1,5 +1,5 @@
 ;
-; src/ui/modules/hotkeys.au3
+; src\ui\core\input.au3
 ;
 #include-once
 

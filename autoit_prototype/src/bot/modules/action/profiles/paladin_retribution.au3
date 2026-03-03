@@ -1,5 +1,5 @@
 ;
-; src/bot/modules/action/action_profiles/paladin_retribution.au3
+; src\bot\modules\action\profiles\paladin_retribution.au3
 ;
 #include-once
 

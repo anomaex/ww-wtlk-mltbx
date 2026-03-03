@@ -1,5 +1,5 @@
 ;
-; src/bot/main.au3
+; src\bot\main.au3
 ;
 #include-once
 

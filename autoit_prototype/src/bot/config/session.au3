@@ -1,5 +1,5 @@
 ;
-; src/bot/config/session.au3
+; src\bot\config\session.au3
 ;
 #include-once
 

@@ -1,5 +1,5 @@
 ;
-; src/bot/modules/login/log_in.au3
+; src\bot\modules\login\login.au3
 ;
 #include-once
 

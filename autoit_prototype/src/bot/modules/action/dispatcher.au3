@@ -1,5 +1,5 @@
 ;
-; src/bot/modules/action/dispatcher.au3
+; src\bot\modules\action\dispatcher.au3
 ;
 #include-once
 

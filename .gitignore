@@ -33,5 +33,6 @@ secret.au3
 /autoit_prototype/src/bot/config/secret.au3
 /autoit_prototype/user_data
 
-# Temporary
-Cargo.lock
+# Addon World of Warcraft
+secret.lua
+/addon/config/secret.lua

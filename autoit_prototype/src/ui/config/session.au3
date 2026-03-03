@@ -1,5 +1,5 @@
 ;
-; src/ui/config/session.au3
+; src\ui\config\session.au3
 ;
 #include-once
 

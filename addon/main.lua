@@ -1,15 +1,18 @@
 --
 -- main.lua
 --
-local addon_name, store = ...
-store.core = store.core or {}
+local _, store = ...
 
 
 local function init()
-    local frame = store.core.create_frame("InWorld")
-    frame:set_color(0, 0, 255)
+    local in_game_frame = store.core.create_frame("InWorld")
+    in_game_frame:set_color(0, 0, 255)
 
-    store.modules.bindings.init()
+    store.core.set_bindings(store.config.binding_profile)
+
+    store.core.remove_all_macros()
+
+    store.modules.action.start()
 end
 
 

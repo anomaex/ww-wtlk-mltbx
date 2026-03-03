@@ -1,5 +1,5 @@
 ;
-; src/bot/modules/action/common.au3
+; src\bot\modules\action\common.au3
 ;
 #include-once
 

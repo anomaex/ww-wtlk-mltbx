@@ -1,5 +1,5 @@
 ;
-; src/bot/modules/login/log_in_data.au3
+; src\bot\modules\login\dispatcher.au3
 ;
 #include-once
 

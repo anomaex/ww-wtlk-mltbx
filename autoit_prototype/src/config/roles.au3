@@ -1,5 +1,5 @@
 ;
-; src/config/roles.au3
+; src\config\roles.au3
 ;
 #include-once
 

@@ -1,5 +1,5 @@
 ;
-; src/ui/config/constants.au3
+; src\ui\config\constants.au3
 ;
 #include-once
 
