@@ -9,7 +9,7 @@
 #include "..\..\..\utils\logger.au3"
 
 ; Local
-#include "..\..\config\session.au3"
+#include "..\..\state\session.au3"
 #include "..\..\config\colors.au3"
 #include "..\..\core\window.au3"
 #include "..\..\core\scanner.au3"
@@ -44,7 +44,7 @@ func enter_to_world()
     endif
 
     local $timer = TimerInit()
-    local $timeout = 10000
+    local $timeout = 60000
 
     local $resolution, $coords_dict, $colors_dict
 
@@ -69,12 +69,12 @@ func enter_to_world()
         endif
 
         if TimerDiff($timer) > $timeout then
-            log_error("Can't log into account, STUCK Log In process, timeout END, for a Role: " & $g_role, $g_gw_hwnd)
-            exit 0
+            exit_error()
         endif
 
         Sleep(200)
-        ;ToolTip("Color: " & $color, @DesktopWidth / 2, 10) ; For check color
+
+        ;ToolTip("Color: " & $color, @DesktopWidth / 2, 10) ; for check color
         ;$timer = TimerInit()
         ;continueloop
 
@@ -86,9 +86,6 @@ func enter_to_world()
         local $px_clr_dc_err_f = get_pixel_color($g_gw_hwnd, $coords_dc_err_f[0], $coords_dc_err_f[1])
         local $px_clr_dc_err_s = get_pixel_color($g_gw_hwnd, $coords_dc_err_s[0], $coords_dc_err_s[1])
         if $px_clr_dc_err_f = $colors_dc_err_f and $px_clr_dc_err_s = $colors_dc_err_s then
-            ControlSend($g_gw_hwnd, "", "", "{ENTER}")
-            Sleep(100)
-            $timer = TimerInit()
             continueloop
         endif
 
@@ -100,9 +97,6 @@ func enter_to_world()
         local $px_clr_incrct_err_f = get_pixel_color($g_gw_hwnd, $coords_incrct_err_f[0], $coords_incrct_err_f[1])
         local $px_clr_incrct_err_s = get_pixel_color($g_gw_hwnd, $coords_incrct_err_s[0], $coords_incrct_err_s[1])
         if $px_clr_incrct_err_f = $colors_incrct_err_f and $px_clr_incrct_err_s = $colors_incrct_err_s then
-            ControlSend($g_gw_hwnd, "", "", "{ENTER}")
-            Sleep(100)
-            $timer = TimerInit()
             continueloop
         endif
 
@@ -126,16 +120,22 @@ func enter_to_world()
                 Sleep(500)
                 ControlSend($g_gw_hwnd, "", "", "{TAB}")
                 Sleep(100)
-                $timer = TimerInit()
-                continueloop
             elseif $px_clr_acc_name_f <> $colors_acc_name_f and $px_clr_acc_name_s <> $colors_acc_name_s then
-                ControlSend($g_gw_hwnd, "", "", $account_password, 1)
-                Sleep(500)
-                ControlSend($g_gw_hwnd, "", "", "{ENTER}")
-                Sleep(100)
-                $timer = TimerInit()
-                continueloop
+                local $coords_acc_pass_f = $coords_dict.Item("acc_pass_f")
+                local $coords_acc_pass_s = $coords_dict.Item("acc_pass_s")
+                local $colors_acc_pass_f = $colors_dict.Item("acc_pass_f")
+                local $colors_acc_pass_s = $colors_dict.Item("acc_pass_s")
+                local $px_clr_acc_pass_f = get_pixel_color($g_gw_hwnd, $coords_acc_pass_f[0], $coords_acc_pass_f[1])
+                local $px_clr_acc_pass_s = get_pixel_color($g_gw_hwnd, $coords_acc_pass_s[0], $coords_acc_pass_s[1])
+                if $px_clr_acc_pass_f <> $colors_acc_pass_f and $px_clr_acc_pass_s <> $colors_acc_pass_s then
+                    ControlSend($g_gw_hwnd, "", "", $account_password, 1)
+                    Sleep(100)
+                endif
             endif
+
+            ; Remove auto log in to account, temporarily.
+
+            continueloop
         endif
     
         ; Check select character
@@ -151,8 +151,6 @@ func enter_to_world()
         if $px_clr_slct_char_f = $colors_slct_char_f and $px_clr_slct_char_s = $colors_slct_char_s and $px_clr_slct_char_t = $colors_slct_char_t then
             ControlSend($g_gw_hwnd, "", "", "{ENTER}")
             if $g_role = $ROLE_TANK then exit 0 ; TANK main game window, only for log in to world
-            Sleep(500)
-            $timer = TimerInit()
             continueloop
         endif
         
@@ -162,4 +160,10 @@ func enter_to_world()
             exitloop
         endif
     wend
+endfunc
+
+
+func exit_error()
+    log_error("Can't log into account, STUCK Log In process, timeout END, for a Role: " & $g_role, $g_gw_hwnd)
+    exit 0
 endfunc

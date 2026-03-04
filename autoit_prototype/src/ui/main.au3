@@ -3,6 +3,9 @@
 ;
 #include-once
 
+; Shared
+#include "..\utils\logger.au3"
+
 
 if not FileExists(@ScriptDir & "\run.au3") then
     log_error("Not correct directory for run UI script.")
@@ -18,18 +21,20 @@ Opt("GUIOnEventMode", 1) ; Enable events for click on elements, without logic in
 
 ; Shared
 #include "..\config\constants.au3"
-#include "..\utils\logger.au3"
 #include "..\config\roles.au3"
 
 ; Local
 #include "config\constants.au3"
 #include "config\paths.au3"
-#include "config\session.au3"
+
+#include "state\session.au3"
+
 #include "core\file_dialog.au3"
 #include "core\process.au3"
 #include "core\config_manager.au3"
 #include "core\cache_manager.au3"
-#include "modules\hotkeys.au3"
+
+#include "modules\hotkeys\dispatcher.au3"
 
 #include "assets\style.au3"
 
@@ -49,8 +54,7 @@ local $ogw_b_btn = GUICtrlCreateButton("...", $STYLE_GRP_GAME_MGW_B_BTN_LEFT, $S
 
 ; --- Start group ---
 GUICtrlCreateGroup(" Start ", $STYLE_GRP_LEFT, $STYLE_GRP_START_TOP, $STYLE_GRP_WIDTH, $STYLE_GRP_START_HEIGHT)
-local $start_main_cbox = GUICtrlCreateCheckbox("MAIN", $STYLE_GRP_GAME_MGW_LBL_LEFT, $STYLE_GRP_START_M_CBOX_TOP, $STYLE_GRP_START_M_CBOX_WIDTH, $STYLE_GRP_GAME_MGW_INPT_HEIGHT)
-local $start_run_btn = GUICtrlCreateButton("Run", $STYLE_GRP_START_RUN_BTN_LEFT, $STYLE_GRP_START_M_CBOX_TOP, $STYLE_GRP_START_RUN_BTN_WIDTH, $STYLE_GRP_GAME_MGW_INPT_HEIGHT)
+local $start_run_btn = GUICtrlCreateButton("Run", $STYLE_GRP_START_RUN_BTN_LEFT, $STYLE_GRP_START_RUN_BTN_TOP, $STYLE_GRP_START_RUN_BTN_WIDTH, $STYLE_GRP_GAME_MGW_INPT_HEIGHT)
 ; -----
 
 ; --- Start one by one group ---
@@ -68,13 +72,11 @@ init_cache($PATH_USER_DATA_DIR)
 load_config()
 load_cache()
 
-local $block_gui = false ; Prevent multi-click, logical block
+local $block_gui = false ; prevent multi-click, logical block
 
 GUISetOnEvent($GUI_EVENT_CLOSE, "close_ui_event")
 GUICtrlSetOnEvent($mgw_b_btn, "mgw_b_btn_click")
 GUICtrlSetOnEvent($ogw_b_btn, "ogw_b_btn_click")
-GUICtrlSetOnEvent($ogw_b_btn, "ogw_b_btn_click")
-GUICtrlSetOnEvent($start_main_cbox, "start_main_cbox_click")
 GUICtrlSetOnEvent($start_run_btn, "start_run_btn_click")
 GUICtrlSetOnEvent($sobo_tank_btn, "sobo_tank_btn_click")
 GUICtrlSetOnEvent($sobo_healer_btn, "sobo_healer_btn_click")
@@ -105,7 +107,6 @@ endfunc
 
 
 func close_ui_event()
-    hotkeys_close()
     exit 0
 endfunc
 
@@ -132,22 +133,14 @@ func ogw_b_btn_click()
 endfunc
 
 
-func start_main_cbox_click()
-    if set_block_gui(true) then return
-    set_block_gui(true)
-    local $state = 0
-    if GUICtrlRead($start_main_cbox) = $GUI_CHECKED then
-        $state = 1
-    endif
-    save_rmcbox_to_config_file($state)
-    set_block_gui(false)
-endfunc
-
-
 func start_run_btn_click()
     if set_block_gui(true) then return
-    if check_msg_for_run_all() then
-        run_all()
+    if question_msg_for_run_all() then
+        run_one_by_one($ROLE_TANK)
+        run_one_by_one($ROLE_HEALER)
+        run_one_by_one($ROLE_DPS_0)
+        run_one_by_one($ROLE_DPS_1)
+        run_one_by_one($ROLE_DPS_2)
     endif
     set_block_gui(false)
 endfunc
@@ -191,70 +184,57 @@ endfunc
 func load_config()
     GUICtrlSetData($mgw_input, load_path_from_config_file($GW_TYPE_MAIN))
     GUICtrlSetData($ogw_input, load_path_from_config_file($GW_TYPE_OTHER))
-    if load_rmcbox_from_config_file() then
-        GUICtrlSetState($start_main_cbox, $GUI_CHECKED)
-    else
-        GUICtrlSetState($start_main_cbox, $GUI_UNCHECKED)
-    endif
 endfunc
 
 
 func load_cache()
     for $i = 0 to UBound($g_game_windows) - 1
-        $g_game_windows[$i][0] = HWnd(load_hwnd_from_cache_process_file($i))
+        $g_game_windows[$i] = HWnd(load_hwnd_from_cache_process_file($i))
     next
 endfunc
 
 
-func run_all()
-    if GUICtrlRead($start_main_cbox) = $GUI_CHECKED then
-        run_one_by_one($ROLE_TANK)
-    endif
-    run_one_by_one($ROLE_HEALER)
-    run_one_by_one($ROLE_DPS_0)
-    run_one_by_one($ROLE_DPS_1)
-    run_one_by_one($ROLE_DPS_2)
+func question_msg_for_run_all()
+    local $state = MsgBox(BitOR(4, 32), "Running ALL game window?", "TANK, HEALER, DPS first, DPS second, DPS third game windows." & @CRLF & "Are you sure you want to run the startup script for the ALL game windows?", -1, $ui_hwnd)
+    if $state = 6 then return true
+    return false
 endfunc
 
 
 func run_one_by_one($role)
-    local $path = get_role_gw_path($role)
-    if $path = "" then return
+    if not IsInt($role) then return
 
-    local $flag = check_running_game_window($g_game_windows[$role][0])
-    local $hwnd = HWnd(0)
-    if not $flag then
+    local $path = GUICtrlRead(($role = $ROLE_TANK) ? $mgw_input : $ogw_input)
+    if StringStripWS($path, 3) = "" then
+        log_warning("Not correct path to start wow.exe, check the path: " & $path, $ui_hwnd)
+        return
+    endif
+    $path = StringStripWS($path, 3)
+
+    local $is_wg_running = check_running_game_window($g_game_windows[$role])
+    if not $is_wg_running then
         local $launch_dir = StringLeft($path, StringInStr($path, "\", 0, -1) - 1)
-        ; Launch only in -d3d9ex, for more stable and performance fps, reduce lags, etc., NEED for CORRECT colors
+        ; Launch only in -d3d9ex, for more stable and performance fps, reduce lags, etc..
+        ; WARNING! Need for CORRECT colors.
         local $pid = Run($path & " -d3d9ex", $launch_dir, @SW_SHOWNOACTIVATE)
         if @error then
-            log_warning("Can't run game window, wow.exe, path: " & $path, $ui_hwnd)
+            log_warning("Can't run game window, wow.exe, path: " & $path & @CRLF & "Launch stopped.", $ui_hwnd)
             return
         endif
-
-        $hwnd = get_hwnd_from_pid($pid, $TITLE_GAME_WINDOW)
+        
+        local $hwnd = get_hwnd_from_pid($pid, $TITLE_GAME_WINDOW)
         if not IsHWnd($hwnd) or $hwnd = HWnd(0) then
-            log_warning("Can't find HWND from PID for game window, wow.exe, path: " & $path, $ui_hwnd)
+            log_warning("Can't find HWND from PID for game window, wow.exe, path: " & $path & @CRLF & "Launch stopped.", $ui_hwnd)
             return
         endif
 
-        $g_game_windows[$role][0] = $hwnd
+        $g_game_windows[$role] = $hwnd
         save_hwnd_to_cache_process_file($role, $hwnd)
-    else
-        $hwnd = $g_game_windows[$role][0]
+        Sleep(100)
     endif
 
     check_running_bot($role) ; Check bot script, if already running, close and start a new bot script
-    Run(@AutoItExe & ' "src\bot\main.au3" ' & $role & ' ' & String($hwnd))
-endfunc
-
-
-; gw - game window
-func get_role_gw_path($role)
-    if $role = $ROLE_TANK then
-        return GUICtrlRead($mgw_input)
-    endif
-    return GUICtrlRead($ogw_input)
+    Run(@AutoItExe & ' "src\bot\main.au3" ' & $role & ' ' & $g_game_windows[$role])
 endfunc
 
 
@@ -274,17 +254,4 @@ func check_running_bot($role)
     if WinExists($title) then
         WinKill($title)
     endif
-endfunc
-
-
-func check_msg_for_run_all()
-    local $tank_info = ""
-    if GUICtrlRead($start_main_cbox) = $GUI_CHECKED then
-        $tank_info = "TANK, "
-    endif
-    local $state = MsgBox(BitOR(4, 48), "Running ALL game window?", $tank_info & "HEALER, DPS first, DPS second, DPS third game windows." & @CRLF & "Are you sure you want to run the startup script for the ALL game windows?", -1, $ui_hwnd)
-    if $state = 6 then
-        return true
-    endif
-    return false
 endfunc

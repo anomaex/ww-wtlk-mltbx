@@ -31,6 +31,12 @@ func _init_1280x1024_coords_map()
     local $acc_name_s = [718, 536]
     $d.Item("acc_name_s") = $acc_name_s
 
+    local $acc_pass_f = [527, 624]
+    $d.Item("acc_pass_f") = $acc_pass_f
+    local $acc_pass_s = [541, 624]
+    $d.Item("acc_pass_s") = $acc_pass_s
+    
+
     local $slct_char_f = [613, 993]
     $d.Item("slct_char_f") = $slct_char_f
     local $slct_char_s = [668, 992]
@@ -57,6 +63,9 @@ func _init_1280x1024_colors_map()
 
     $d.Item("acc_name_f") = 8421504 ; 0x808080
     $d.Item("acc_name_s") = 8421504 ; 0x808080
+
+    $d.Item("acc_pass_f") = 16777215 ; 0xFFFFFF
+    $d.Item("acc_pass_s") = 16777215 ; 0xFFFFFF
 
     $d.Item("slct_char_f") = 16238336 ; 0xF7C700
     $d.Item("slct_char_s") = 16107793 ; 0xF5C911

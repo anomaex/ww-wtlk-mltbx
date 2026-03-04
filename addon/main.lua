@@ -3,34 +3,35 @@
 --
 local _, store = ...
 
+local ingame_frame = nil
 local is_fully_loaded = false
 
 
 local function init()
-    local in_game_frame = store.core.create_frame("InWorld")
-    in_game_frame:set_color(0, 0, 255)
-
     store.core.set_bindings(store.config.binding_profile)
-
     store.core.remove_all_macros()
 
     store.modules.action.init()
+    store.modules.follow.init()
 end
 
 
 local function start()
     store.modules.action.start()
+    store.modules.follow.start()
 end
 
 
 local function main()
     if is_fully_loaded then return end
+    if ingame_frame then return end
 
-    local main_event_frame = store.core.create_event_frame("main")
+    ingame_frame = store.core.create_frame("inworld")
+    ingame_frame:set_color(store.config.COLORS.BLUE)
 
-    main_event_frame:RegisterEvent("PLAYER_ENTERING_WORLD")
-    
-    main_event_frame:SetScript("OnEvent", function(_, event, ...)
+    ingame_frame:RegisterEvent("PLAYER_ENTERING_WORLD")
+
+    ingame_frame:SetScript("OnEvent", function(_, event, ...)
         if event == "PLAYER_ENTERING_WORLD" then
             init()
             start()

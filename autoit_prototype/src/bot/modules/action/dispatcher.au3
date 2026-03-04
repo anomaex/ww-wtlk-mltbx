@@ -4,7 +4,7 @@
 #include-once
 
 #include "..\..\..\utils\logger.au3"
-#include "..\..\config\session.au3"
+#include "..\..\state\session.au3"
 #include "common.au3"
 
 #include "profiles\druid_restoration.au3"

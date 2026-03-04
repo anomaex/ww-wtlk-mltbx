@@ -23,7 +23,7 @@ function store.core.remove_macro(id_or_name)
 end
 
 
-function store.core.create_macro(name, icon, body, per_char)
+function store.core.create_macro(name, body, per_char, icon)
     local num_global, num_perchar = GetNumMacros()
     if not per_char then
         if num_global >= 36 then
@@ -39,7 +39,7 @@ function store.core.create_macro(name, icon, body, per_char)
     local safe_name = tostring(name):sub(1, 16)
     store.core.remove_macro(safe_name)
     local safe_body = tostring(body):sub(1, 255)
-    local icon_index = tonumber(icon) or 0
+    local icon_index = tonumber(icon) or 1
     local is_per_char = (per_char == 1 or per_char == true) and 1 or 0
     CreateMacro(safe_name, icon_index, safe_body, is_per_char)
 end

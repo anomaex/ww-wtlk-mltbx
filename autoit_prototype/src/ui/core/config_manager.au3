@@ -38,22 +38,3 @@ func load_path_from_config_file($gw_type_name)
     check_create_config_dir()
     return ""
 endfunc
-
-
-; Save run main checkbox to config file
-func save_rmcbox_to_config_file($state)
-    check_create_config_dir()
-    IniWrite($config_file_path, "start", "main_start_cbox", String($state))
-endfunc
-
-
-; Load run main checkbox to config file
-func load_rmcbox_from_config_file()
-    if FileExists($config_file_path) then
-        local $value = IniRead($config_file_path, "start", "main_start_cbox", "")
-        if $value = "1" then return true
-    else
-        check_create_config_dir()
-    endif
-    return false
-endfunc

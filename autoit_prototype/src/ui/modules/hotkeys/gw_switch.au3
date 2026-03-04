@@ -1,22 +1,19 @@
 ;
-; src\ui\modules\hotkeys.au3
+; src\ui\modules\hotkeys\gw_switch.au3.au3
 ;
 #include-once
-
-#include "..\config\session.au3"
-#include "..\..\utils\logger.au3"
 
 
 local $current_gw_id = 1
 
 
-func switch_gw()
-    if WinActive($g_game_windows[0][0]) then
+func switch_gw($game_windows)
+    if WinActive($game_windows[0][0]) then
         $current_gw_id = 1
     endif
 
     for $i = 1 to 4
-        local $current_gw_hwnd = $g_game_windows[$current_gw_id][0]
+        local $current_gw_hwnd = $game_windows[$current_gw_id][0]
         
         if WinExists($current_gw_hwnd) then
             if WinActive($current_gw_hwnd) = 0 then

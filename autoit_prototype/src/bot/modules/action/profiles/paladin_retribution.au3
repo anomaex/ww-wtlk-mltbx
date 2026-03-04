@@ -3,7 +3,7 @@
 ;
 #include-once
 
-#include "..\..\..\config\session.au3"
+#include "..\..\..\state\session.au3"
 
 
 func execute_paladin_retribution()
