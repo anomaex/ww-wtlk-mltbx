@@ -34,7 +34,7 @@ func hotkeys_update()
     if _IsPressed("71", $dll_user32) then
         if not $is_f2_press then
             $is_f2_press = true
-            test_post_message(71)
+            send_hotkey_message(71)
         endif
     else
         $is_f2_press = False
@@ -44,9 +44,7 @@ func hotkeys_update()
     if _IsPressed("20", $dll_user32) then
         if not $is_space_press then
             $is_space_press = true
-            if WinActive($g_game_windows[0]) then
-                test_post_message(20)
-            endif
+            send_hotkey_message(20)
         endif
     else
         $is_space_press = False

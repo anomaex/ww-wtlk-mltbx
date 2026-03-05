@@ -8,12 +8,14 @@
 #include "..\..\..\config\constants.au3"
 
 
+local const $WM_BOT_COMMAND = _WinAPI_RegisterWindowMessage($PROJECT_NAME & "_message_identifier")
+
 local $cache_bots_list[0]
 local $timer_cache_bots = 0
 local $timeout_cache_bots = 5000 ; 5 sec
 
 
-func test_post_message($send_key_code)
+func send_hotkey_message($send_key_code)
     _refresh_bots_cache()
     
     for $i = 0 to UBound($cache_bots_list) - 1
@@ -25,7 +27,7 @@ endfunc
 func _refresh_bots_cache()
     if UBound($cache_bots_list) <> 0 or TimerDiff($timer_cache_bots) < $timeout_cache_bots then return
     
-    local $bots_list = WinList($PROJECT_NAME & "-bot-")
+    local $bots_list = WinList($PROJECT_NAME & "_bot_window") ; need hidden bot window for PostMessage, NOT a bot script title name
     if $bots_list[0][0] = 0 then
         return
     endif

@@ -30,9 +30,7 @@ endfunc
 
 
 func check_win($hwnd, $title_game_window)
-    if not WinExists($hwnd) then
-        if WinGetTitle($hwnd) <> $title_game_window then 
-            exit 0
-        endif
+    if not WinExists($hwnd, $title_game_window) then
+        exit 0
     endif
 endfunc

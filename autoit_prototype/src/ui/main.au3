@@ -250,7 +250,7 @@ endfunc
 
 
 func check_running_bot($role)
-    local $title = $PROJECT_NAME & "-bot-" & $role
+    local $title = $PROJECT_NAME & "_bot_" & $role
     if WinExists($title) then
         WinKill($title)
     endif
