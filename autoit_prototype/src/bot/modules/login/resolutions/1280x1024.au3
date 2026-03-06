@@ -4,72 +4,41 @@
 #include-once
 
 
-global $g_1280x1024_COORDS = _init_1280x1024_coords_map()
-global $g_1280x1024_COLORS = _init_1280x1024_colors_map()
+global $g_1280x1024_x_y_c_dictionary = _init_1280x1024_x_y_c_map()
 
 
-func _init_1280x1024_coords_map()
+func _init_1280x1024_x_y_c_map()
     local $d = ObjCreate("Scripting.Dictionary")
 
-    local $dc_err_f = [396, 480]
-    $d.Item("dc_err_f") = $dc_err_f
-    local $dc_err_s = [852, 481]
-    $d.Item("dc_err_s") = $dc_err_s
-
-    local $incrct_err_f = [364, 519]
-    $d.Item("incrct_err_f") = $incrct_err_f
-    local $incrct_err_s = [814, 520]
-    $d.Item("incrct_err_s") = $incrct_err_s
-
-    local $lgn_scrn_f = [526, 501]
-    $d.Item("lgn_scrn_f") = $lgn_scrn_f
-    local $lgn_scrn_s = [736, 505]
-    $d.Item("lgn_scrn_s") = $lgn_scrn_s
-
-    local $acc_name_f = [552, 533]
-    $d.Item("acc_name_f") = $acc_name_f
-    local $acc_name_s = [718, 536]
-    $d.Item("acc_name_s") = $acc_name_s
-
-    local $acc_pass_f = [527, 624]
-    $d.Item("acc_pass_f") = $acc_pass_f
-    local $acc_pass_s = [541, 624]
-    $d.Item("acc_pass_s") = $acc_pass_s
+    local $inpt_name_pass_f = [525, 501, 16762624] ; 0xFFC700
+    $d.Item("inpt_name_pass_f") = $inpt_name_pass_f
+    local $inpt_name_pass_s = [704, 500, 16762624]
+    $d.Item("inpt_name_pass_s") = $inpt_name_pass_s
     
+    local $inpt_name_f = [552, 534, 8421504] ; 0x808080
+    $d.Item("inpt_name_f") = $inpt_name_f
+    local $inpt_name_s = [702, 534, 8421504]
+    $d.Item("inpt_name_s") = $inpt_name_s
 
-    local $slct_char_f = [613, 993]
+    local $inpt_pass_f = [541, 624, 16777215] ; 0xFFFFFF
+    $d.Item("inpt_pass_f") = $inpt_pass_f
+    local $inpt_pass_s = [562, 624, 16777215]
+    $d.Item("inpt_pass_s") = $inpt_pass_s
+
+
+    local $slct_char_f = [618, 992, 14201361] ; 0xD8B211
     $d.Item("slct_char_f") = $slct_char_f
-    local $slct_char_s = [668, 992]
+    local $slct_char_s = [664, 992, 14201361]
     $d.Item("slct_char_s") = $slct_char_s
-    local $slct_char_t = [692, 940]
-    $d.Item("slct_char_t") = $slct_char_t
-    
-    return $d
-endfunc
 
+    local $in_world_f = [5, 5, 255] ; 0x0000FF
+    $d.Item("in_world_f") = $in_world_f
 
-; raw_color: 16762624, bgr_color: 0xFFC700, use only raw, bgr for testing
-func _init_1280x1024_colors_map()
-    local $d = ObjCreate("Scripting.Dictionary")
-
-    $d.Item("dc_err_f") = 16762624 ; 0xFFC700
-    $d.Item("dc_err_s") = 16762624 ; 0xFFC700
-
-    $d.Item("incrct_err_f") = 458503 ; 0x06FF07
-    $d.Item("incrct_err_s") = 458503 ; 0x06FF07
-
-    $d.Item("lgn_scrn_f") = 16762624 ; 0xFFC700
-    $d.Item("lgn_scrn_s") = 16762624 ; 0xFFC700
-
-    $d.Item("acc_name_f") = 8421504 ; 0x808080
-    $d.Item("acc_name_s") = 8421504 ; 0x808080
-
-    $d.Item("acc_pass_f") = 16777215 ; 0xFFFFFF
-    $d.Item("acc_pass_s") = 16777215 ; 0xFFFFFF
-
-    $d.Item("slct_char_f") = 16238336 ; 0xF7C700
-    $d.Item("slct_char_s") = 16107793 ; 0xF5C911
-    $d.Item("slct_char_t") = 16762624 ; 0xFFC700
+    ; Errors
+    local $incrrct_name_pass_f = [364, 526, 458503] ; 0x06FF07
+    $d.Item("incrrct_name_pass_f") = $incrrct_name_pass_f
+    local $incrrct_name_pass_s = [813, 521, 458503]
+    $d.Item("incrrct_name_pass_s") = $incrrct_name_pass_s
 
     return $d
 endfunc

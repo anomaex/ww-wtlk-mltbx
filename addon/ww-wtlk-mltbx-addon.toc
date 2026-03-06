@@ -13,6 +13,7 @@ core\commands.lua
 core\frame_manager.lua
 core\binding_manager.lua
 core\macro_manager.lua
+core\actionbar_manager.lua
 
 modules\action\common.lua
 modules\action\profiles\druid_restoration.lua

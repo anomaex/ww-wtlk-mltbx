@@ -28,12 +28,12 @@ function store.core.create_macro(name, body, per_char, icon)
     if not per_char then
         if num_global >= 36 then
             print("Not have space for create macros in global")
-            return
+            return false
         end
     else
         if num_perchar >= 18 then
             print("Not have space for create macros in PerCharacter")
-            return
+            return false
         end
     end
     local safe_name = tostring(name):sub(1, 16)
@@ -42,4 +42,5 @@ function store.core.create_macro(name, body, per_char, icon)
     local icon_index = tonumber(icon) or 1
     local is_per_char = (per_char == 1 or per_char == true) and 1 or 0
     CreateMacro(safe_name, icon_index, safe_body, is_per_char)
+    return safe_name
 end

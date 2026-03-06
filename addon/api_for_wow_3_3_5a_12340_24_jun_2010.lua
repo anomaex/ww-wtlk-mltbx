@@ -6,7 +6,7 @@
 
 
 --- Determines if the unit exists and is in the current zone or not, in view zone and if loaded to game RAM.
---- @param unit string example: "name", "player", "target", "party1", ...
+--- @param unit string example: "player", "target", "party1", ...
 --- @return boolean is_exists 1 (true), if exists, else nil if not.
 function UnitExists(unit) end
 
@@ -25,3 +25,32 @@ function FollowUnit(unit) end
 --- @param unit string example: "name", "player", "target", "party1", ...
 --- @return boolean is_dead_ghost 1 (true), if unit is dead or a ghost, nil otherwise.
 function UnitIsDeadOrGhost(unit) end
+
+
+function SecureCmdOptionParse(text) end
+
+function GetTime() end
+
+function UnitBuff(unit, buff_name) end
+function UnitCastingInfo(unit) end
+function UnitChannelInfo(unit) end
+
+function InCombatLockdown() end
+
+function CreateMacro(name, icon_index, body, per_char) end
+function GetNumMacros() end
+function GetMacroInfo(id_or_name) end
+function GetMacroIndexByName(name) end
+function DeleteMacro(id_or_name) end
+
+function GetBindingKey(command) end
+function LoadBindings(index) end
+function SetBinding(key, command) end
+function SaveBindings(index) end
+
+function ClearCursor() end
+function PickupMacro(name) end
+function PlaceAction(slot_id) end
+function ClearCursor() end
+
+function GetNumPartyMembers() end

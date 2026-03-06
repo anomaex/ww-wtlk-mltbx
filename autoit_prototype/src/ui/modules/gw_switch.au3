@@ -1,9 +1,9 @@
 ;
-; src\ui\modules\hotkeys\gw_switch.au3.au3
+; src\ui\modules\gw_switch.au3
 ;
 #include-once
 
-#include "..\..\state\session.au3"
+#include "..\state\session.au3"
 
 
 local $current_gw_id = 1

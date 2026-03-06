@@ -6,15 +6,17 @@ local _, store = ...
 SLASH_WWMLTBXADDON1 = "/wwwtlkmltbx"
 
 
-local function HandleSlashCommand(msg)
+local function handle_slash_command(msg)
     local evaluated_msg = SecureCmdOptionParse(msg)
     print(evaluated_msg)
-    if evaluated_msg == "follow" then
+    if evaluated_msg == "follow_pause" then
+        store.state.is_follow_pause = true
+    elseif evaluated_msg == "follow_start" then
         store.state.is_follow = true
-    elseif evaluated_msg == "stopfollow" then
+    elseif evaluated_msg == "follow_stop" then
         store.state.is_follow = false
     end
 end
 
 
-SlashCmdList["WWMLTBXADDON"] = HandleSlashCommand
+SlashCmdList["WWMLTBXADDON"] = handle_slash_command

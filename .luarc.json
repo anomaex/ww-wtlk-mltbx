@@ -1,20 +1,7 @@
 {
     "diagnostics.globals": [
         "SlashCmdList",
-        "CreateFrame",
         "UIParent",
-        "SaveBindings",
-        "SetBinding",
-        "LoadBindings",
-        "GetBindingKey",
-        "GetMacroInfo",
-        "DeleteMacro",
-        "GetNumMacros",
-        "CreateMacro",
-        "GetTime",
-        "UnitCastingInfo",
-        "UnitChannelInfo",
-        "UnitBuff",
-        "SecureCmdOptionParse"
+        "CreateFrame"
     ]
 }

@@ -7,12 +7,13 @@
 #include "..\utils\logger.au3"
 
 
+Opt("TrayAutoPause", 0) ; Disable AutoIt tray auto-pause
+
 if not FileExists(@ScriptDir & "\run.au3") then
     log_error("Not correct directory for run UI script.")
     exit 0
 endif
 
-Opt("TrayAutoPause", 0) ; Disable AutoIt tray auto-pause
 Opt("GUIOnEventMode", 1) ; Enable events for click on elements, without logic in main loop
 
 
@@ -34,7 +35,7 @@ Opt("GUIOnEventMode", 1) ; Enable events for click on elements, without logic in
 #include "core\config_manager.au3"
 #include "core\cache_manager.au3"
 
-#include "modules\hotkeys\dispatcher.au3"
+#include "modules\hotkeys\hotkeys_manager.au3"
 
 #include "assets\style.au3"
 

@@ -4,25 +4,42 @@
 #include-once
 
 
-Opt("SendKeyDownDelay", 5) ; 5 - default
+Opt("SendKeyDelay", 0) ; 5 - default, it's for ControlSend()
+Opt("SendKeyDownDelay", 0) ; 5 - default, it's for ControlSend()
 
 
 #include <WinAPISysWin.au3>
 
 
-local const $WM_KEYDOWN = 0x0100
-local const $WM_KEYUP = 0x0101
+local $l_PAUSE_UP = 10
+local $l_WM_KEYDOWN = 0x0100
+local $l_WM_KEYUP = 0x0101
 
 
-func input_send($hwnd, $vk_code, $is_raw = 0)
-    _WinAPI_PostMessage($hwnd, $WM_KEYDOWN, $vk_code, 0)
-    Sleep(5) 
-    _WinAPI_PostMessage($hwnd, $WM_KEYUP, $vk_code, 0)
+; In HEX, see https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
+; Function _WinAPI_PostMessage() more stable for DirectX/OpenGL window.
+; Function ControlSend() can: may skip keystrokes, may can't work on background, modifiers like Shift/Ctrl/Alt may "stick", etc.
 
-    ;ControlSend($hwnd, "", "", $msg, $is_raw)
+
+func input_send($hwnd, $vk_hex_code)
+    _WinAPI_PostMessage($hwnd, $l_WM_KEYDOWN, $vk_hex_code, 0)
+    Sleep($l_PAUSE_UP)
+    _WinAPI_PostMessage($hwnd, $l_WM_KEYUP, $vk_hex_code, 0)
 endfunc
 
 
-func input_jump($hwnd)
-    input_send($hwnd, 0x20) ; 0x20 - SPACE
+func input_send_down($hwnd, $vk_hex_code)
+    _WinAPI_PostMessage($hwnd, $l_WM_KEYDOWN, $vk_hex_code, 0)
+    Sleep($l_PAUSE_UP)
+endfunc
+
+
+func input_send_up($hwnd, $vk_hex_code)
+    Sleep($l_PAUSE_UP)
+    _WinAPI_PostMessage($hwnd, $l_WM_KEYUP, $vk_hex_code, 0)
+endfunc
+
+
+func input_text($hwnd, $text)
+    ControlSend($hwnd, "", "", $text, 1)
 endfunc

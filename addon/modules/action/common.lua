@@ -16,9 +16,13 @@ function C.init()
     cast_frame = store.core.create_frame("action_cast_or_eatdrink", 15)
     cast_frame:set_color(colors.STATE_NON_CAST)
 
-    local macro_body =  "/wwwtlkmltbx [mod:alt] follow; stopfollow"
-    store.core.create_macro("follow", macro_body, true)
+    local follow_mac_body =  "/wwwtlkmltbx [mod:ctrl] follow_stop; [mod:alt] follow_start; follow_pause"
+    local follow_mac_name = store.core.create_macro("follow", follow_mac_body, true)
+    if follow_mac_name then
+        store.core.assign_macro_to_bar_slot(follow_mac_name, 61)
+    end
 
+    local quit_mac_body = "/wwwtlkmltbx [mod:alt] quit"
     -- Add here logic for find eat or drink in inventory and put on ActionBar for hotkey
 end
 
