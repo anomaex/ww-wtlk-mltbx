@@ -22,7 +22,13 @@ function C.init()
         store.core.assign_macro_to_bar_slot(follow_mac_name, 61)
     end
 
-    local quit_mac_body = "/wwwtlkmltbx [mod:alt] quit"
+    local quit_mac_body = "/quit"
+    local quit_mac_name = store.core.create_macro("quit", quit_mac_body, true)
+    if quit_mac_name then
+        store.core.assign_macro_to_bar_slot(quit_mac_name, 72)
+    end
+
+
     -- Add here logic for find eat or drink in inventory and put on ActionBar for hotkey
 end
 

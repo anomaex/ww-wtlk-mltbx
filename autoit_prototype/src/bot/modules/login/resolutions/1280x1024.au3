@@ -30,6 +30,8 @@ func _init_1280x1024_x_y_c_map()
     $d.Item("slct_char_f") = $slct_char_f
     local $slct_char_s = [664, 992, 14201361]
     $d.Item("slct_char_s") = $slct_char_s
+    local $slct_char_t = [712, 943, 2499105] ; 0x262221
+    $d.Item("slct_char_t") = $slct_char_t
 
     local $in_world_f = [5, 5, 255] ; 0x0000FF
     $d.Item("in_world_f") = $in_world_f

@@ -13,12 +13,18 @@
 
 local $dll_user32 = DllOpen("user32.dll")
 
-local $is_f1_press = false 
-local $is_space_press = false
+local $f1_press = false
+
+local $space_press = false
 
 local $f2_press = false 
 local $ctrl_f2_press = false
 local $alt_f2_press = false
+
+local $f11_press = false
+
+local $f12_press = false
+local $ctrl_f12_press = false
 
 
 ; Key in HEX, see https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
@@ -28,14 +34,14 @@ func hotkeys_update()
     local $is_ctrl = _IsPressed(0x11, $dll_user32) ; 0x11 - left or right CTRL
     local $is_alt = _IsPressed(0x12, $dll_user32) ; 0x12 - left or right ALT
 
-    ; F1 - 0x70
+    ; F1
     if _IsPressed(0x70, $dll_user32) then
-        if not $is_f1_press then
-            $is_f1_press = true
+        if not $f1_press then
+            $f1_press = true
             switch_gw($g_game_windows)
         endif
     else
-        $is_f1_press = False
+        $f1_press = False
     endif
 
     ; F2 or F2 + CTRL or F2 + ALT
@@ -63,15 +69,44 @@ func hotkeys_update()
         $alt_f2_press = false
     endif
 
-    ; SPACEBAR - 0x20
+    ; F11
+    if _IsPressed(0x7A, $dll_user32) then
+        if not $f11_press then
+            $f11_press = true
+            send_hotkey_message(0x7A)
+        endif
+    else
+        $f11_press = False
+    endif
+
+    ; F12 or F12 + CTRL
+    local $is_f12 = _IsPressed(0x7B, $dll_user32) 
+    if $is_f12 then
+        if $is_ctrl then
+            if not $ctrl_f12_press then
+                $ctrl_f12_press = true
+                send_hotkey_message(0x7B, 0x11)
+            endif
+        else
+            if not $f12_press and not $ctrl_f12_press then
+                $f12_press = true
+                send_hotkey_message(0x71)
+            endif
+        endif
+    else
+        $f12_press = false
+        $ctrl_f12_press = False
+    endif
+
+    ; SPACEBAR
     if _IsPressed(0x20, $dll_user32) then
-        if not $is_space_press then
-            $is_space_press = true
+        if not $space_press then
+            $space_press = true
             if WinActive($g_game_windows[0]) then
                 send_hotkey_message(0x20)
             endif
         endif
     else
-        $is_space_press = False
+        $space_press = False
     endif
 endfunc

@@ -16,6 +16,7 @@ if $CmdLine[0] <> 2 then exit 0
 ; Local
 #include "modules\hotkeys\hotkeys_manager.au3"
 #include "modules\login\login.au3"
+#include "config\secret.au3"
 
 
 local $bot_name_title = $PROJECT_NAME & "_bot_" & $CmdLine[1]
@@ -38,10 +39,21 @@ endif
 
 login_process()
 
+local $profile_id = $g_role - 1
+$g_current_profile = $sec_classes_and_specs[$profile_id][0] & "_" & $sec_classes_and_specs[$profile_id][1]
+
+
+local $PAUSE = 150
+
 while true
     check_win($g_gw_hwnd, $TITLE_GAME_WINDOW)
 
+    if not $g_bot_actions then
+        Sleep($PAUSE)
+        continueloop
+    endif
 
+    ; logic
 
-    Sleep(150)
+    Sleep($PAUSE)
 wend

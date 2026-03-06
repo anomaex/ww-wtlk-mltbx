@@ -123,12 +123,16 @@ func login_process()
             local $px_clr_slct_char_f = get_pixel_color($g_gw_hwnd, $slct_char_f[0], $slct_char_f[1])
             local $px_clr_slct_char_s = get_pixel_color($g_gw_hwnd, $slct_char_s[0], $slct_char_s[1])
             if $px_clr_slct_char_f = $slct_char_f[2] or $px_clr_slct_char_s = $slct_char_s[2] then
-                input_send($g_gw_hwnd, 0x0D)
-                Sleep(100)
-                $state = 20
-                $timer = TimerInit()
-                if $g_role = 0 then exit 0 ; tank window only for log in logic
-                continueloop
+                local $slct_char_t = $x_y_c_dict.Item("slct_char_t")
+                local $px_clr_slct_char_t = get_pixel_color($g_gw_hwnd, $slct_char_t[0], $slct_char_t[1])
+                if $px_clr_slct_char_t <> $slct_char_t[2] then
+                    input_send($g_gw_hwnd, 0x0D)
+                    Sleep(100)
+                    $state = 20
+                    $timer = TimerInit()
+                    if $g_role = 0 then exit 0 ; tank window only for log in logic
+                    continueloop
+                endif
             endif
         endif
 
