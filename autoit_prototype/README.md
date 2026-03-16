@@ -2,7 +2,9 @@
 
 ### Multibox with auto mode for healer and dps in dungeons, for game "World of Warcraft: Wrath of the Lich King", version 3.3.5a (12340) Jun 24 2010
 
-#### Under development ...
+#### What's working now:
+- Start wow.exe game window and auto log in to world.
+- Added some hotkeys for control multibox, see below.
 
 
 Hotkeys:

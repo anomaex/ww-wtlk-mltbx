@@ -34,13 +34,12 @@ local function follow()
             end
         end
     end
-    -- Stop follow can work only from AutoIt, we can't stop follow from scripts.
+    -- Stop follow can work only from AutoIt, we can't stop follow from lua script, addon or macro.
 end
 
 
 function F.start()
     if not follow_frame then return end
-
 
     follow_frame:SetScript("OnUpdate", function(self, elapsed)
         total_elapsed = total_elapsed + elapsed

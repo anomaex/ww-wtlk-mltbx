@@ -1,20 +1,15 @@
 ;
 ; src\bot\modules\hotkeys_manager.au3
 ;
+; Key in HEX, see https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
+;
+
 #include-once
-
 #include "..\..\core\input.au3"
-
 #include "..\..\state\session.au3"
-
 #include "receiver.au3"
 
-
-; Key in HEX, see https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
-
-
 local $follow = false
-
 
 func hotkey_handler($key, $modifier)
     select
@@ -55,11 +50,9 @@ func hotkey_handler($key, $modifier)
     endselect
 endfunc
 
-
 func input_jump()
     input_send($g_gw_hwnd, 0x20)
 endfunc
-
 
 func input_follow_pause()
     input_send($g_gw_hwnd, 0x31) ; 0x31 - key 1
@@ -83,7 +76,6 @@ func input_follow_break()
     input_send($g_gw_hwnd, 0x25) ; 0x25 - Left arrow
     input_send($g_gw_hwnd, 0x27) ; 0x27 - Right arrow
 endfunc
-
 
 func input_quit()
     input_send($g_gw_hwnd, 0x7A)

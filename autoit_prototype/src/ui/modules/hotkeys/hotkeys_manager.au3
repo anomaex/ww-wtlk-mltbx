@@ -1,15 +1,14 @@
 ;
 ; src\ui\modules\hotkeys\hotkeys_manager.au3
 ;
+; Key in HEX, see https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
+;
+
 #include-once
-
 #include <Misc.au3>
-
 #include "..\..\state\session.au3"
-
 #include "..\gw_switch.au3"
 #include "sender.au3"
-
 
 local $dll_user32 = DllOpen("user32.dll")
 
@@ -25,10 +24,6 @@ local $f11_press = false
 
 local $f12_press = false
 local $ctrl_f12_press = false
-
-
-; Key in HEX, see https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
-
 
 func hotkeys_update()
     local $is_ctrl = _IsPressed(0x11, $dll_user32) ; 0x11 - left or right CTRL
