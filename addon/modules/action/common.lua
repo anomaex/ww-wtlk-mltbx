@@ -1,6 +1,7 @@
 --
 -- modules\action\common.lua
 --
+
 local _, store = ...
 store.modules = store.modules or {}
 store.modules.action = store.modules.action or {}
@@ -10,7 +11,7 @@ local C = store.modules.action.common
 local cast_frame = nil
 local colors = store.config.COLORS
 
-
+-- Here add common macros for all, helpers macros.
 function C.init()
     if cast_frame then return end
     cast_frame = store.core.create_frame("action_cast_or_eatdrink", 15)
@@ -22,12 +23,11 @@ function C.init()
         store.core.assign_macro_to_bar_slot(follow_mac_name, 61)
     end
 
-    local quit_mac_body = "/quit"
+    local quit_mac_body =  "/wwwtlkmltbx [mod:ctrl] force_quit; quit"
     local quit_mac_name = store.core.create_macro("quit", quit_mac_body, true)
     if quit_mac_name then
         store.core.assign_macro_to_bar_slot(quit_mac_name, 72)
     end
-
 
     -- Add here logic for find eat or drink in inventory and put on ActionBar for hotkey
 end

@@ -62,3 +62,6 @@ MultiBarBottomLeft = _G["MultiBarBottomLeft"]
 MultiBarBottomRight = _G["MultiBarBottomRight"]
 MultiBarRight = _G["MultiBarRight"]
 MultiBarLeft = _G["MultiBarLeft"]
+
+function Quit() end
+function ForceQuit() end

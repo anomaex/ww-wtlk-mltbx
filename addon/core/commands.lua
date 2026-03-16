@@ -15,6 +15,10 @@ local function handle_slash_command(msg)
         store.state.is_follow = true
     elseif evaluated_msg == "follow_stop" then
         store.state.is_follow = false
+    elseif evaluated_msg == "quit" then
+        Quit()
+    elseif evaluated_msg == "force_quit" then
+        ForceQuit()
     end
 end
 

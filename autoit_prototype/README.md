@@ -10,9 +10,8 @@
 Hotkeys:
 F1 - swith game window, HEALER -> DPS 0 -> DPS 1 -> DPS 2, if you switch to TANK game window, chain reset to start on HEALER
 
-F2 - pause follow
+F2 - start/stop follow
 F2 + CTRL - stop follow
-F2 + ALT - start/stop follow
 
 F11 - /quit from game
 
