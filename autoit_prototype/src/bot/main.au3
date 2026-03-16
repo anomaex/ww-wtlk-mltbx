@@ -8,7 +8,6 @@ Opt("TrayAutoPause", 0) ; Disable AutoIt tray auto-pause
 
 if $CmdLine[0] <> 2 then exit 0
 
-
 ; Shared
 #include "..\utils\logger.au3"
 #include "..\config\constants.au3"
@@ -17,7 +16,6 @@ if $CmdLine[0] <> 2 then exit 0
 #include "modules\hotkeys\hotkeys_manager.au3"
 #include "modules\login\login.au3"
 #include "config\secret.au3"
-
 
 local $bot_name_title = $PROJECT_NAME & "_bot_" & $CmdLine[1]
 AutoItWinSetTitle($bot_name_title)
@@ -41,7 +39,6 @@ login_process()
 
 local $profile_id = $g_role - 1
 $g_current_profile = $sec_classes_and_specs[$profile_id][0] & "_" & $sec_classes_and_specs[$profile_id][1]
-
 
 local $PAUSE = 150
 

@@ -42,6 +42,7 @@ func login_process()
                 log_error("Can't get game window client size, for a role: " & $g_role, $g_gw_hwnd)
                 exit 0
             endif
+
             $resolution = $gw_client_size[0] & "x" & $gw_client_size[1]
         endif
 

@@ -235,7 +235,7 @@ func run_one_by_one($role)
     endif
 
     check_running_bot($role) ; Check bot script, if already running, close and start a new bot script
-    Run(@AutoItExe & ' "src\bot\main.au3" ' & $role & ' ' & $g_game_windows[$role])
+    Run(@AutoItExe & " " & @ScriptDir & "\src\bot\main.au3 " & $role & " " & $g_game_windows[$role])
 endfunc
 
 
