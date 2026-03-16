@@ -28,3 +28,13 @@ function store.core.assign_macro_to_bar_slot(name, slot_id)
     PlaceAction(slot_id)
     ClearCursor()
 end
+
+
+function store.core.visible_action_bars(enable)
+    SetActionBarToggles(1, 1, 1, 1)
+    MultiActionBar_Update()
+    MultiBarBottomLeft:Show()
+    MultiBarBottomRight:Show()
+    MultiBarRight:Show()
+    MultiBarLeft:Show()
+end

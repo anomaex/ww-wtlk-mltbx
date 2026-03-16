@@ -54,3 +54,11 @@ function PlaceAction(slot_id) end
 function ClearCursor() end
 
 function GetNumPartyMembers() end
+
+function SetActionBarToggles(bottom_left_state, bottom_right_state, side_right_state, side_right_2state) end
+function MultiActionBar_Update() end
+
+MultiBarBottomLeft = _G["MultiBarBottomLeft"]
+MultiBarBottomRight = _G["MultiBarBottomRight"]
+MultiBarRight = _G["MultiBarRight"]
+MultiBarLeft = _G["MultiBarLeft"]

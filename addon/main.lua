@@ -10,6 +10,7 @@ local is_fully_loaded = false
 local function init()
     store.core.set_bindings(store.config.binding_profile)
     store.core.remove_all_macros()
+    store.core.visible_action_bars(true); -- if action bar is disabled, then enable all
 
     store.modules.action.init()
     store.modules.follow.init()
