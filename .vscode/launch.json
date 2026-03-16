@@ -1,17 +1,14 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "au3",
+            "name": "Run and Forget",
+            "type": "node",
             "request": "launch",
-            "name": "Run AutoIt3 script",
-            "script": "${workspaceFolder}/autoit_prototype/run.au3",
-            "cwd": "${workspaceFolder}/autoit_prototype",
-            "executable": "${config:autoit3.installDir}/AutoIt3.exe",
-            "arguments": []
+            "preLaunchTask": "AutoItDetach",
+            "runtimeExecutable": "cmd.exe", 
+            "runtimeArgs": ["/c", "exit"],
+            "internalConsoleOptions": "neverOpen"
         }
     ]
 }
